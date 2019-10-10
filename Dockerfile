@@ -3,14 +3,16 @@ FROM node:10.16.1-alpine
 
 # :: Run
 USER root
+RUN apk --update --no-cache add shadow
 
-RUN apk --update --no-cache add shadow npm
-
-# :: Install Websocket
-RUN npm install -g websocket
-
+# :: Standardfile main.js
 RUN mkdir -p /app
 ADD ./source/main.js /app/main.js
+
+# :: Install Websocket
+RUN apk --update --no-cache add npm
+RUN cd /app
+RUN npm install websocket
 
 # :: docker -u 1000:1000 (no root initiative)
 RUN usermod -u 1000 node \
