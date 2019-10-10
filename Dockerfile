@@ -1,5 +1,5 @@
 # :: Header
-FROM node:10.16.1-alpine
+FROM node:alpine
 
 # :: Run
 USER root
@@ -12,6 +12,9 @@ ADD ./source/main.js /app/main.js
 RUN usermod -u 1000 node \
 	&& groupmod -g 1000 node \
 	&& chown -R node:node /app
+
+# :: Install Websocket
+RUN apk install npm && npm install websocket
 
 # :: Volumes
 VOLUME ["/app"]
