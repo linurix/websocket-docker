@@ -14,7 +14,7 @@ RUN usermod -u 1000 node \
 	&& chown -R node:node /app
 
 # :: Install Websocket
-RUN apk install npm && npm install websocket
+RUN apk add npm && npm install websocket
 
 # :: Volumes
 VOLUME ["/app"]
